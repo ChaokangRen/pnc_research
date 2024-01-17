@@ -92,4 +92,43 @@ $$
    - 在进入安全的纵向环境前，c2的加速度最多为$-a_{max,brake}$ ,在那之后，任何非负加速度都是允许的。
 2. 如果处于纵向危险阈值时间，两车处于驾驶在相向方向，且c2为逆行
    - 在时间间隔$[t^{long}_b,t^{long}_b +\rho] $ c1的加速度不能超过$a_{max,accel}$,并且在$t^{long}_b+\rho $之后加速度至少为$-a_{min,brake,correct}$ 直到完全刹停。
-   - c2的加速度在时间间隔$[t^{long}_b,t^{long}_b +\rho] $ 至少为$-a_{max,accel}$ ,并且在$t^{long}_b+\rho $之后加速度至少为$-a_{min,brake}$ 直到完全刹停。
+   - c2的加速度在时间间隔$[t^{long}_b,t^{long}_b +\rho] $ 至少为$-a_{max,accel}$ ,并且在$t^{long}_b+\rho $之后加速度至少为$a_{min,brake}$ 直到完全刹停。
+
+### 3.4 Lateral Safe Distance and Proper Response
+
+与纵向速度不同，纵向速度可以长时间保持为0(汽车只是没有移动)，而横向速度完全保持为0是不可能的，因为汽车通常会进行小的横向波动。因此需要引入一个鲁棒的横向速度概念。
+
+**Definition 5($\mu$ -lateral-velocity)**
+
+考虑在时间t时，横向位置在$l$ 的一个点。那么在t时刻的$\mu$-lateral velocity定义如下：令$t_{out}>t$表示该点到达横向位置$l_{out}$的最早时间，$l_{out}$要么为$l-\mu/2$ 要么是$l+\mu/2$（如果该时间不存在，则$t_{out}=\infty$ .如果在时间间隔$t'\in (t,t_{out})$ ,该点的横向位置始终是$l$,那么横向速度就是0，否则为$(l_{out}-l) /(t_{out}-t)$ 
+
+粗略地说，为了使两辆车发生碰撞，要求它们在纵向和横向上都很接近。对于纵轴，我们已经使用安全距离形式化了“接近”的概念。我们现在对横向距离做同样的计算:
+
+**Definition 6(Safe Lateral Distance)**
+
+关于参数$\rho,a^{lat}_{min,brake},a^{lat}_{max,accel},\mu$,如果在时间间隔$[0,\rho]$,两车朝着对车方向施加横向加速度$a^{lat}_{max,accel}$，接着施加横向制动$a^{lat}_{min,brake}$ 直到到达0横向速度，接着最终的横向距离至少为$\mu$,那么可以认为$c_1$与$c_2$的横向安全距离在速度为$v_1,v_2$下是安全的。
+
+横向距离计算方式如下：
+
+**Lemma 4**
+$$
+d_{min} = \mu + \left[
+\frac{v_1+v_{1,\rho}}{2}\rho +
+\frac{v^2_{1,\rho}}{2a^{lat}_{min,brake}}-
+\left(
+\frac{v_2+v_{2,\rho}}{2}\rho - \frac{v^2_{2,rho}}{2a^{lat}_{min,brake}}
+\right)
+\right]
+$$
+其中，$v_{1,\rho}=v_1+\rho a^{lat}_{max,accel}$ ,$v_{2,\rho}=v_2-\rho a^{lat}_{max,accel}$ 
+
+**Definition 7(Dangerous Lateral Situation and Danger Threshold time)**
+
+与定义3类似，只是变成了横向
+
+**Definition 8(Lateral Proper response)**
+
+假设t是横向危险时刻，且$t^{lat}_{b}$ 是相应的横向危险阈值时间，同时$c_1$在$c_2$的左侧，两车的横向固有响应应满足以下对横向速度的约束:
+
+- 如果$t\in [t^{lat}_b,t^{lat}_b+\rho]$ ，两车可以做任何行为，只要他们的横向加速度a,满足$|a|\leq a^{lat}_{max,accel}$ 
+- 
