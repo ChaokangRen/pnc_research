@@ -55,3 +55,14 @@ $$
 C'''(u)=(a_0-2a_1+a_2)u^2 +2(-a_0+a_1)t+a_0=b_0u^2 + b_1u + b_0
 $$
 显然经过一系列简化后，三阶导数为简单的二次型，后面进一步的将代价函数转为二次型即可，后续工作较为简单，且之前已做过多次，这里不在进一步推导。
+
+**对约束的推导**
+
+$C(u)=\sum^n_{i=0}B_{n,i}(u)P_i$
+
+假设有$l \leq C(u_i) \leq h$
+
+展开有：
+$$
+l\leq \left(\matrix{5\\0}\right)(1-u_i)^5P_0+\left(\matrix{5\\1}\right)(1-u_i)^4u_iP_1+\left(\matrix{5\\2}\right)(1-u_i)^3u_i^2P_2+\\ \left(\matrix{5\\3}\right)(1-u_i)^2u_i^3P_3+\left(\matrix{5\\4}\right)(1-u_i)^1u_i^4P_4+\left(\matrix{5\\5}\right)u_i^5P_5 \leq h
+$$
